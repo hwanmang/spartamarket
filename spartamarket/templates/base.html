@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title></title>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="left">
+            <ul>
+                <li>
+                    <!-- <img src="{% static 'images/market.jpg' %}"> -->
+                    <a href="/" class="market"> 스파르타마켓</a>
+                </li>
+                <li>
+                    <a href="/" class="good">찜</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <input type="text" name="searchbar" id="searchbar" placeholder="검색하기..." autofocus required />
+
+            {% if request.user.is_authenticated %}
+            <h3>안녕하세요, {{ user }}님</h3>
+            <form action="{% url 'accounts:logout' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="로그아웃" class="logout" style="font-family: 'KCC-Hanbit';">
+            </form>
+            {% else %}
+            <a href="{% url 'accounts:login'%}" style="margin: 10px;">로그인</a>
+            <a href="" style="margin: 10px;">회원가입</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+</body>
+
+</html>
