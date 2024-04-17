@@ -1,5 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
+{% load humanize %}
 
 {% block content %}
-<h1>{{ user }}의 프로필</h1>
-{% endblock content %}
+<h1>[ {{ profile_user.username }} ]의 프로필 페이지</h1>
+<p>가입일: {{ profile_user.date_joined }}</p>
+
+<h2>등록한 물품들</h2>
+<div class="product_list">
+    {% for product in products %}
+    <div class="product_list_card">
+        <a href="{% url 'products:detail' product.id %}">
+            <img src="{% static 'images/coinman.png' %}" style="width: 200px; height:200px; border-radius: 10px;">
+        </a>
+        <a href="{% url 'products:detail' product.id %}">
+            <div>{{ product.title }}</div>
+            <div>{{ product.price|intcomma }}원</div>
+        </a>
+    </div>
+    {% endfor %}
+    {% endblock content %}

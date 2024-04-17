@@ -22,10 +22,10 @@
                     <a href="/" class="market">스파르타마켓</a>
                 </li>
                 <li>
-                    <a href="{% url 'accounts:profile' %}" class="profile">프로필</a>
+                    <a href="{% url 'accounts:profile' user.id %}" class="profile">프로필</a>
                 </li>
                 <li>
-                    <a href="{% url 'accounts:update_user' %}">회원정보수정</a>
+                    <a href="{% url 'accounts:update_user' %}" class="profile">회원정보수정</a>
                 </li>
             </ul>
         </div>

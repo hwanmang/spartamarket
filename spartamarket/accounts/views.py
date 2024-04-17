@@ -7,10 +7,11 @@ from django.contrib.auth import (
 )
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from django.shortcuts import get_object_or_404
-from .models import UserProfile
+from django.shortcuts import render, get_object_or_404
+from .models import User
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
+from products.models import Product
 
 
 def login(request):
@@ -36,7 +37,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            auth_login(request, form.instance)  # 회원가입 후 자동 로그인
+            auth_login(request, form.instance)
             return redirect("/")
         else:
             messages.error(request, '회원가입에 실패하였습니다. 올바른 정보를 입력해주세요.')
@@ -47,9 +48,10 @@ def signup(request):
 
 
 @login_required
-def profile(request, username):
-    user_profile = get_object_or_404(UserProfile, user__username=username)
-    return render(request, 'profile.html', {'user_profile': user_profile})
+def profile(request, user_id):
+    profile_user = User.objects.get(pk=user_id)
+    products = Product.objects.filter(author=profile_user)
+    return render(request, 'accounts/profile.html', {'profile_user': profile_user, 'products': products})
 
 
 @require_POST
@@ -64,7 +66,7 @@ def delete_user(request):
 def update_user(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect("/")
     else:
@@ -86,3 +88,10 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     context = {"form": form}
     return render(request, "accounts/change_password.html", context)
+
+
+def good(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    user: User = request.user
+    user.good_products.add(product)
+    return redirect("products:list")
