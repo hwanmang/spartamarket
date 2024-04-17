@@ -1,14 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 {% load humanize %}
 
 {% block content %}
-<a href="{% url 'products:create' %}">글 작성하기</a>
-{% for product in products %}
-<div>
-    <a href="{% url 'products:detail' product.id %}">
-        <div>{{ product.id }}, {{ product.tittle }}</div>
-        <div>{{ product.price|intcomma }}</div>
-    </a>
+<div class="to_page">
+    <a href="{% url 'products:create' %}">글 작성하기</a>
 </div>
-{% endfor %}
+<div class="product_list">
+    {% for product in products %}
+    <div class="product_list_card">
+        <a href="{% url 'products:detail' product.id %}">
+            <img src="{% static 'images/coinman.png' %}" style="width: 200px; height:200px; border-radius: 10px;">
+        </a>
+        <a href="{% url 'products:detail' product.id %}">
+            <div>{{ product.title }}</div>
+            <div>{{ product.price|intcomma }}원</div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

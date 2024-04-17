@@ -19,13 +19,10 @@
                     <!-- <img src="{% static 'images/market.jpg' %}"> -->
                     <a href="/" class="market"> 스파르타마켓</a>
                 </li>
-                <li>
-                    <a href="/" class="good">찜</a>
-                </li>
             </ul>
         </div>
         <div class="right">
-            <input type="text" name="searchbar" id="searchbar" placeholder="검색하기..." autofocus required />
+            <input type="text" name="searchbar" id="searchbar" placeholder="검색하기...">
 
             {% if request.user.is_authenticated %}
             <h3>안녕하세요, {{ user }}님</h3>
@@ -35,7 +32,7 @@
             </form>
             {% else %}
             <a href="{% url 'accounts:login'%}" style="margin: 10px;">로그인</a>
-            <a href="" style="margin: 10px;">회원가입</a>
+            <a href="{% url 'accounts:signup'%}" style="margin: 10px;">회원가입</a>
             {% endif %}
         </div>
     </div>

@@ -7,3 +7,4 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     price = models.PositiveIntegerField()
+    author = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
