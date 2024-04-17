@@ -3,10 +3,16 @@
 {% block content %}
 <h1>로그인</h1>
 
-<form action="{% url 'accounts:login' %}" method="POST">
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <button>로그인</button>
+</form>
+<!-- <form action="{% url 'accounts:login' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">로그인</button>
-</form>
+</form> -->
 
 {% endblock content %}
