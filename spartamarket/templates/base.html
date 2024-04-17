@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/market.png' %}">
     <title></title>
 </head>
 
@@ -16,8 +17,15 @@
         <div class="left">
             <ul>
                 <li>
-                    <!-- <img src="{% static 'images/market.jpg' %}"> -->
-                    <a href="/" class="market"> 스파르타마켓</a>
+                    <img src="{% static 'images/market.png' %}">
+                    <br>
+                    <a href="/" class="market">스파르타마켓</a>
+                </li>
+                <li>
+                    <a href="{% url 'accounts:profile' %}" class="profile">프로필</a>
+                </li>
+                <li>
+                    <a href="{% url 'accounts:update_user' %}">회원정보수정</a>
                 </li>
             </ul>
         </div>
