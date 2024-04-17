@@ -7,3 +7,8 @@ from django.db import models
 class User(AbstractUser):
     good_products = models.ManyToManyField(
         'products.Product', related_name='good_users')
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    join_date = models.DateField(auto_now_add=True)
