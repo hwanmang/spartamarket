@@ -20,13 +20,16 @@ def list(request):
 
 @login_required
 def create(request):
-    form = ProductForm()
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(author=request.user)
-            return redirect("products:list")
-    return render(request, 'products/create.html', {"form": form})
+            product = form.save(author=request.user)
+            return redirect("products:detail", product.id)
+    else:
+        form = ProductForm()
+
+    context = {"form": form}
+    return render(request, "products/create.html", context)
 
 
 def detail(request, product_id):
@@ -59,13 +62,4 @@ def delete(request, product_id):
         messages.add_message(request, messages.ERROR, '게시글이 삭제되었습니다.')
     else:
         messages.add_message(request, messages.ERROR, '작성자가 아니라면 삭제할 수 없습니다.')
-    return redirect("products:list")
-
-
-@login_required
-@require_POST
-def good_view(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    user = request.user
-    user.good_products.add(product)
     return redirect("products:list")
