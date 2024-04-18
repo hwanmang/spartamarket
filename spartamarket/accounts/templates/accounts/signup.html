@@ -4,7 +4,19 @@
 <h1>회원가입</h1>
 <form action="{% url 'accounts:signup' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>아이디: <input type="text" name="username" maxlength="30" autocapitalize="none" autocomplete="username" autofocus
+            required id="id_username"></p>
+    <span class="helptext">문자, 숫자 및 @/./+/-/_로 이루어진 30자 이하만 가능합니다.</span>
+    <p>비밀번호: <input type="password" name="password1" autocomplete="new-password" required id="id_password1"></p>
+    <p>비밀번호 확인: <input type="password" name="password2" autocomplete="new-password" required id="id_password2"></p>
+    <span class="helptext">
+        <ul>
+            <li>비밀번호는 다른 개인정보와 너무 유사하면 안 됩니다.</li>
+            <li>비밀번호는 8자 이상이어야 합니다.</li>
+            <li>비밀번호는 일반적으로 사용되는 비밀번호일 수 없습니다.</li>
+            <li>비밀번호는 숫자로만 구성될 수 없습니다.</li>
+        </ul>
+    </span>
     <button type="submit">회원가입</button>
 </form>
 {% endblock content %}
