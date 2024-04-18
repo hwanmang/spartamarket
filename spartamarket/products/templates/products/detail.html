@@ -13,13 +13,17 @@
 <p>수정일시: {{ product.updated_at }}</p>
 <form action="{% url 'accounts:good' product.id %}" method="post">
     {% csrf_token %}
-    <button {% if user in product.goot_users %} disabled {% endif %}>찜하기</button>
+    <button {% if user in product.goot_users.all %} disabled {% endif %}>찜하기</button>
 </form>
-<a href="{% url 'products:update' product.id %}"><button>수정하기</button></a>
+<div class="button_center">
+    <a href="{% url 'products:update' product.id %}"><button>수정하기</button></a>
+</div>
 <form action="{% url 'products:delete' product.id %}" method="post">
     {% csrf_token %}
     <button>삭제하기</button>
 </form>
 <br><br>
-<a href="{% url 'products:list' %}"><button>목록으로</button></a><br>
+<div class="button_center">
+    <a href="{% url 'products:list' %}"><button>목록으로</button></a><br>
+</div>
 {% endblock content %}
