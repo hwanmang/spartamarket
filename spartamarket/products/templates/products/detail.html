@@ -16,11 +16,14 @@
     {% csrf_token %}
     {% if user in product.like_users.all %}
     <img src="{% static 'images/heart_after.png' %}" width="30px" height="30px">
+    <br>
     <input type="submit" value="좋아요 취소">
     {% else %}
     <img src="{% static 'images/heart_before.png' %}" width="30px" height="30px">
+    <br>
     <input type="submit" value="좋아요">
     {% endif %}
+    <br><br>
 </form>
 <div class="button_center">
     <a href="{% url 'products:update' product.id %}"><button>수정하기</button></a>
