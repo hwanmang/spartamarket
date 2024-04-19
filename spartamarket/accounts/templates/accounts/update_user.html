@@ -8,5 +8,10 @@
     {% csrf_token %}
     <button type="submit">수정하기</button>
 </form>
+<hr>
+<form action="{% url 'accounts:delete_user' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">회원탈퇴</button>
+</form>
 
 {% endblock %}

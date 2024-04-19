@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 
 
 class User(AbstractUser):
-    good_products = models.ManyToManyField(
-        'products.Product', related_name='good_users')
+    following = models.ManyToManyField(
+        "self", symmetrical=False, related_name="followers"
+    )
 
 
 class UserProfile(models.Model):

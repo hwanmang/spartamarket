@@ -12,6 +12,7 @@ from .models import User
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
 from products.models import Product
+from django.contrib.auth import get_user_model
 
 
 def login(request):
@@ -44,12 +45,13 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
+    print(form)
     return render(request, "accounts/signup.html", context)
 
 
 @login_required
 def profile(request, user_id):
-    profile_user = User.objects.get(pk=user_id)
+    profile_user = get_object_or_404(get_user_model(), pk=user_id)
     products = Product.objects.filter(author=profile_user)
     return render(request, 'accounts/profile.html', {'profile_user': profile_user, 'products': products})
 
@@ -95,3 +97,17 @@ def good(request, product_id):
     user: User = request.user
     user.good_products.add(product)
     return redirect("products:list")
+
+
+@require_POST
+def follow(request, user_pk):
+    if request.user.is_authenticated:
+        member = get_object_or_404(get_user_model(), pk=user_pk)
+        if request.user != member:
+            print(request, member.followers.all())
+            if request.user in member.followers.all():
+                member.followers.remove(request.user)
+            else:
+                member.followers.add(request.user)
+        return redirect("accounts:profile", member.pk)
+    return redirect("accounts:login")
