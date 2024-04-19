@@ -65,15 +65,31 @@ def delete(request, product_id):
     return redirect("products:list")
 
 
+# @require_POST
+# def like(request, pk):
+#     print(product.pk)
+#     if request.user.is_authenticated:
+#         product = get_object_or_404(Product, pk=pk)
+#         if product.like_users.filter(pk=request.user.pk).exists():
+#             product.like_users.remove(request.user)
+#         else:
+#             product.like_users.add(request.user)
+#     else:
+#         return redirect("accounts:login")
+
+#     return redirect("products:detail", product.pk)
+
+
 @require_POST
 def like(request, pk):
+    print(pk)
     if request.user.is_authenticated:
-        product = get_object_or_404(Product, pk=pk)
-        if product.like_users.filter(pk=request.user.pk).exists():
-            product.like_users.remove(request.user)
+        article = get_object_or_404(Product, pk=pk)
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
         else:
-            product.like_users.add(request.user)
+            article.like_users.add(request.user)
     else:
         return redirect("accounts:login")
 
-    return redirect("products:detail")
+    return redirect("products:detail", pk)

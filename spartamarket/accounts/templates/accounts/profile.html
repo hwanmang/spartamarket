@@ -8,15 +8,15 @@
 
 <div>
     <p>
-        팔로워 : {{ member.followers.count }}명
-        팔로잉 : {{ member.following.count }}명
+        팔로워 : {{ profile_user.followers.count }}명
+        팔로잉 : {{ profile_user.following.count }}명
     </p>
 </div>
 
 <div>
-    <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+    <form action="{% url 'accounts:follow' profile_user.pk %}" method="POST">
         {% csrf_token %}
-        {% if user in member.followers.all %}
+        {% if user in profile_user.followers.all %}
         <button type="submit">언팔로우</button>
         {% else %}
         <button type="submit">팔로우</button>

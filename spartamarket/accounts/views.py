@@ -51,7 +51,7 @@ def signup(request):
 
 @login_required
 def profile(request, user_id):
-    profile_user = User.objects.get(pk=user_id)
+    profile_user = get_object_or_404(get_user_model(), pk=user_id)
     products = Product.objects.filter(author=profile_user)
     return render(request, 'accounts/profile.html', {'profile_user': profile_user, 'products': products})
 
@@ -102,11 +102,12 @@ def good(request, product_id):
 @require_POST
 def follow(request, user_pk):
     if request.user.is_authenticated:
-        user = get_object_or_404(get_user_model(), pk=user_pk)
-        if request.user != user:
-            if request.user in user.followers.all():
-                user.followers.remove(request.user)
+        member = get_object_or_404(get_user_model(), pk=user_pk)
+        if request.user != member:
+            print(request, member.followers.all())
+            if request.user in member.followers.all():
+                member.followers.remove(request.user)
             else:
-                user.followers.add(request.user)
-        return redirect("accounts:profile", user_id=user.pk)
+                member.followers.add(request.user)
+        return redirect("accounts:profile", member.pk)
     return redirect("accounts:login")
