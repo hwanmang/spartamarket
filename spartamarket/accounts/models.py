@@ -1,8 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.views.generic import ListView
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
 # Create your models here.
 
 
