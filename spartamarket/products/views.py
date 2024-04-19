@@ -7,8 +7,8 @@ from django.contrib import messages
 
 
 def index(request):
-    products = Product.objects.all()
-    return render(request, 'products/index.html', {"products": products})
+    latest_products = Product.objects.order_by('-created_at')[:3]
+    return render(request, 'products/index.html', {'latest_products': latest_products})
 
 
 @login_required

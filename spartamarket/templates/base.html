@@ -32,8 +32,6 @@
             </ul>
         </div>
         <div class="right">
-            <input type="text" name="searchbar" id="searchbar" placeholder="검색하기...">
-
             {% if request.user.is_authenticated %}
             <h3>안녕하세요, {{ user }}님</h3>
             <form action="{% url 'accounts:logout' %}" method="POST">
