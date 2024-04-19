@@ -47,3 +47,6 @@
     - 게시글의 타이틀, 내용, 물건의 가격, 작성일, 수정일 표시
     - 좋아요 기능
     - 게시글 수정, 삭제
+
+# ✍️ERD작성
+-   https://github.com/hwanmang/spartamarket/issues/6#issue-2250419267
