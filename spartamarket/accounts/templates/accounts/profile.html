@@ -30,6 +30,14 @@
     <div class="product_list_card">
         <a href="{% url 'products:detail' product.id %}">
             <img src="{% static 'images/coinman.png' %}" style="width: 200px; height:200px; border-radius: 10px;">
+            <form action="{% url 'products:like' product.pk %}" method="POST">
+                {% csrf_token %}
+                {% if user in product.like_users.all %}
+                <img src="{% static 'images/heart_after.png' %}" width="30px" height="30px">
+                {% else %}
+                <img src="{% static 'images/heart_before.png' %}" width="30px" height="30px">
+                {% endif %}
+            </form>
         </a>
         <a href="{% url 'products:detail' product.id %}">
             <div>{{ product.title }}</div>

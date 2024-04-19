@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
+{% load static %}
 
 {% block content %}
 <h2>상세 페이지</h2>
@@ -14,8 +15,10 @@
 <form action="{% url 'products:like' product.pk %}" method="POST">
     {% csrf_token %}
     {% if user in product.like_users.all %}
+    <img src="{% static 'images/heart_after.png' %}" width="30px" height="30px">
     <input type="submit" value="좋아요 취소">
     {% else %}
+    <img src="{% static 'images/heart_before.png' %}" width="30px" height="30px">
     <input type="submit" value="좋아요">
     {% endif %}
 </form>

@@ -148,3 +148,9 @@ form,
     flex-wrap: wrap;
     text-align: center;
 }
+
+.heart {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
