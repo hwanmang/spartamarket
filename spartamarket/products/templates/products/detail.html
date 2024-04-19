@@ -11,9 +11,9 @@
 <p>{{ product.price|intcomma }}원</p>
 <p>작성일시: {{ product.created_at }}</p>
 <p>수정일시: {{ product.updated_at }}</p>
-<form actions="{% url 'products:like' product.pk %}" method="POST">
+<form action="{% url 'products:like' product.pk %}" method="POST">
     {% csrf_token %}
-    {% if user in products.like_users.all %}
+    {% if user in product.like_users.all %}
     <input type="submit" value="좋아요 취소">
     {% else %}
     <input type="submit" value="좋아요">

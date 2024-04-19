@@ -21,7 +21,7 @@ class Product(models.Model):
 
 
 class ProductLike(models.Model):
-    article = models.ForeignKey(
+    product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="likes"
     )
     user = models.ForeignKey(
