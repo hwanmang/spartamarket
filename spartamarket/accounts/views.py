@@ -45,7 +45,6 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
-    print(form)
     return render(request, "accounts/signup.html", context)
 
 
@@ -104,7 +103,6 @@ def follow(request, user_pk):
     if request.user.is_authenticated:
         member = get_object_or_404(get_user_model(), pk=user_pk)
         if request.user != member:
-            print(request, member.followers.all())
             if request.user in member.followers.all():
                 member.followers.remove(request.user)
             else:
