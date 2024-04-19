@@ -10,7 +10,7 @@
     {% for product in products %}
     <div class="product_list_card">
         <a href="{% url 'products:detail' product.id %}">
-            <img src="{% static 'images/coinman.png' %}" style="width: 180px; height:180px; border-radius: 10px;">
+            <img src="{% static 'images/coinman.png' %}">
             <form action="{% url 'products:like' product.pk %}" method="POST">
                 {% csrf_token %}
                 {% if user in product.like_users.all %}

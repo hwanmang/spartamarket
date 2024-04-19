@@ -146,6 +146,12 @@ form,
     text-decoration: none;
 }
 
+.product_list_card>a>img {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+}
+
 .signupform {
     display: flex;
     flex-wrap: wrap;
